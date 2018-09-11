@@ -7,7 +7,8 @@ import tweepy #https://github.com/tweepy/tweepy
 import json
 import wget
 import warnings
-import os,sys
+import os
+import argparse
 
 #Twitter API credentials
 consumer_key = "vvPRqPpKrGbWZ7342c5fgRxoE"
@@ -88,7 +89,10 @@ def save_imgs(media_files):
 
 if __name__ == '__main__':
 
-    assert len(sys.argv)==2, "please input ONE argument as the numbers of images to download"
-    media_files = get_all_images_url("@JeremyClarkson",int(sys.argv[1]))
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--num',default=10,type=int, help='the numbers of images to download')
+    args = parser.parse_args()
+    num = args.num
+    media_files = get_all_images_url("@JeremyClarkson",num)
     print("saving "+str(len(media_files))+" images")
     save_imgs(media_files)
