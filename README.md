@@ -8,9 +8,9 @@ this library will fetch certain numbers of images from a certain twitter account
 # Usage
 
 run the code below will do the whole thing with default settings
-'''python
+```Bash
 python main.py
-'''
+```
 
 for cumstom settings, see below:  
 
