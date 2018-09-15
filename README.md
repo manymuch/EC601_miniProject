@@ -14,19 +14,19 @@ python main.py
 
 for cumstom settings, see below:  
 
-'''python
+'''Bash
 --num
 '''
 int, the number of images to download, twitter only allow up to 3240 images
-'''python
+'''Bash
 --name
 '''
 string, the twitter account to download from, remember to add "@"
-'''python
+'''Bash
 --directory
 '''
 name of the directory to be created for saving the images
-'''python
+'''Bash
 --output_name
 '''
 output video file names
