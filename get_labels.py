@@ -56,4 +56,5 @@ def write_srt(directory):
             f.write("%s\n"%i)
             f.write("%s\n"%get_time_format(i))
             f.write("%s\n"%onelabel(file))
+            print("getting "+str(i)+" labels")
     os.chdir("./../")

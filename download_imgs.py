@@ -44,6 +44,11 @@ def get_all_images_url(screen_name, num):
 
     tweets = api.user_timeline(screen_name=screen_name,count=10, include_rts=False,exclude_replies=True)
 
+    assert len(tweets) is not 0, "this twitter account does not have any tweets"
+
+
+
+
     urls = get_media_url(tweets)
 
     #return urls here if the images in the first tweet have exceed num
@@ -61,6 +66,7 @@ def get_all_images_url(screen_name, num):
                                     include_rts=False,
                                     exclude_replies=True,
                                     max_id=last_id-1)
+        assert len(more_tweets) is not 0, "no more tweets from this account"
         last_id = more_tweets[-1].id-1
         more_urls = get_media_url(more_tweets)
         urls = urls + more_urls
@@ -77,13 +83,16 @@ def get_all_images_url(screen_name, num):
 
 def save_imgs(media_files):
 
+
     if not os.path.exists("./images"):
         os.mkdir("./images")
     os.chdir("./images")
+    i=0
     for media_file in media_files:
-        wget.download(media_file)
+        i=i+1
+        suffix = media_file.split(".")[-1]
+        wget.download(media_file,out=str(i)+"."+suffix)
     os.chdir("./../")
-
 
 
 
