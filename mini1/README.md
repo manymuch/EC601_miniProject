@@ -1,4 +1,4 @@
-# EC601_miniProject
+# EC601_miniProject 1 API usage
 
 
 # Task
