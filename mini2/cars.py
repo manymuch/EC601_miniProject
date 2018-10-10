@@ -57,6 +57,7 @@ model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
 model.summary()
 
 history = model.fit(X_train, Y_train,
-                    batch_size=batch_size, epochs=epochs,
+                    steps_per_epoch=100,
+                    epochs=epochs,
                     verbose=1)
 #score = model.evaluate(X_test, Y_test, verbose=0)
