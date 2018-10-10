@@ -12,6 +12,10 @@
 #$ -l gpu_c=3.5
 
 
+#request 15 minutes maxium running time
+#$ -l h_rt=0:15:00
+
+
 module load python/2.7.13
 module load cuda/8.0
 module load cudnn/5.1
