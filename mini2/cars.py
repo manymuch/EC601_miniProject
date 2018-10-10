@@ -7,7 +7,7 @@ np.random.seed(1337)  # for reproducibility
 
 import keras.backend as K
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, BatchNormalization, MaxPooling2D,Input
+from keras.layers import Dense, Dropout, Activation, BatchNormalization, MaxPooling2D,Input,Model
 from keras.layers import Flatten
 from keras.optimizers import SGD, Adam, RMSprop
 from keras.callbacks import LearningRateScheduler
