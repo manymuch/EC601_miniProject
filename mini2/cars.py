@@ -43,14 +43,18 @@ args = parser.parse_args()
 # nn
 batch_size = args.batchsize
 epochs = args.epochs
-lr_start = 1e-3
 
 X_train, Y_train = load_cars_train()
 X_train = np.reshape(X_train,(-1,32,32,3))
 Y_train = K.one_hot(Y_train,10)
 
+print(X_train.shape)
+print(Y_train.shape)
 
-model = MobileNet(input_shape = (32,32,3),weights=None,classes = 10)
+model = MobileNet(input_shape=(32,32,3), weights=None,include_top=None)
+model = Dense(1024, name='dense1')(model)
+model = Dense(1024, name='dense2')(model)
+model = Dense(10,name='last')(model)
 
 opt = Adam(lr=lr_start)
 model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
