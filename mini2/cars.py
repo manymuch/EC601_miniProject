@@ -48,10 +48,13 @@ lr_start = 1e-3
 X_train, Y_train = load_cars_train()
 print(X_train.shape())
 print(Y_train.shape())
+
+
+
 exit()
 
 
-model = MobileNet(input_shape = [224,224,3],classes = 2)
+model = MobileNet(input_shape = [32,32,3],classes = 10)
 
 opt = Adam(lr=lr_start)
 model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
