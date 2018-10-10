@@ -43,6 +43,7 @@ args = parser.parse_args()
 # nn
 batch_size = args.batchsize
 epochs = args.epochs
+lr_start = 1e-5
 
 X_train, Y_train = load_cars_train()
 X_train = np.reshape(X_train,(-1,32,32,3))
