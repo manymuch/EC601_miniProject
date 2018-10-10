@@ -51,9 +51,6 @@ print(Y_train.shape)
 
 
 
-exit()
-
-
 model = MobileNet(input_shape = [32,32,3],classes = 10)
 
 opt = Adam(lr=lr_start)
@@ -63,4 +60,4 @@ model.summary()
 history = model.fit(X_train, Y_train,
                     batch_size=batch_size, epochs=epochs,
                     verbose=1)
-score = model.evaluate(X_test, Y_test, verbose=0)
+#score = model.evaluate(X_test, Y_test, verbose=0)
