@@ -16,7 +16,7 @@ from keras.applications.mobilenet import MobileNet
 from keras.losses import squared_hinge
 
 def load_cars_train():
-    data_dir = "./../../data/cars"
+    data_dir = "./../../data/cifar10"
 
     file = os.path.join(data_dir,"data_batch_1")
     with open(file,'rb') as fo:
