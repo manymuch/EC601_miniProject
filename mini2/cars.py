@@ -58,6 +58,7 @@ model = MobileNet(input_tensor=inputs,weights=None,include_top=None)(inputs)
 model = Dense(1024, name='dense1')(model)
 model = Dense(1024, name='dense2')(model)
 model = Dense(10,name='last')(model)
+model = Model(inputs=inputs,output=model)
 
 opt = Adam(lr=lr_start)
 model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
