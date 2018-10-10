@@ -46,8 +46,8 @@ epochs = args.epochs
 lr_start = 1e-3
 
 X_train, Y_train = load_cars_train()
-print(X_train.shape())
-print(Y_train.shape())
+print(X_train.shape)
+print(Y_train.shape)
 
 
 
