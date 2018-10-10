@@ -21,7 +21,7 @@ def load_cars_train():
     file = os.path.join(data_dir,"data_batch_1")
     with open(file,'rb') as fo:
         dict = cPickle.load(fo)
-    return  numpy.array(dict['data']),  numpy.array(dict['labels'])
+    return  np.array(dict['data']), np.array(dict['labels'])
 
 def load_cars_test():
     data_dir = "./../data/cars"
