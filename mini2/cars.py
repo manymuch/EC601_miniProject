@@ -51,7 +51,7 @@ print(Y_train.shape)
 
 
 
-model = MobileNet(input_shape = [32,32,3],classes = 10)
+model = MobileNet(input_shape = [32,32,3],weights=None,classes = 10)
 
 opt = Adam(lr=lr_start)
 model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
