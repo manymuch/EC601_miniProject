@@ -1,8 +1,6 @@
-from __future__ import print_function
-import argparse
 import numpy as np
 import os
-import cPickle
+import pickle
 np.random.seed(1337)  # for reproducibility
 
 import keras.backend as K
@@ -20,7 +18,7 @@ def load_cars_train():
 
     file = os.path.join(data_dir,"data_batch_1")
     with open(file,'rb') as fo:
-        dict = cPickle.load(fo)
+        dict = pickle.load(fo)
     return  np.array(dict['data']), np.array(dict['labels'])
 
 def load_cars_test():
@@ -33,16 +31,13 @@ def load_cars_test():
 
     return image, label
 
-parser = argparse.ArgumentParser(description='indicate the numbers of epoch and batchsize')
-parser.add_argument('--epochs', type=int, default = 1)
-parser.add_argument('--batchsize', type=int, default = 50)
-args = parser.parse_args()
+
 
 
 
 # nn
-batch_size = args.batchsize
-epochs = args.epochs
+batch_size = 64
+epochs = 1
 lr_start = 1e-3
 
 X_train, Y_train = load_cars_train()
