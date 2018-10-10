@@ -50,14 +50,14 @@ X_train = np.reshape(X_train,(-1,32,32,3))
 Y_train = K.one_hot(Y_train,10)
 
 
-model = MobileNet(input_shape = [32,32,3],weights=None,classes = 10)
+model = MobileNet(input_shape = (32,32,3),weights=None,classes = 10)
 
 opt = Adam(lr=lr_start)
 model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
 model.summary()
 
 history = model.fit(X_train, Y_train,
-                    steps_per_epoch=100,
+                    batch_size=batch_size,
                     epochs=epochs,
                     verbose=1)
 #score = model.evaluate(X_test, Y_test, verbose=0)
