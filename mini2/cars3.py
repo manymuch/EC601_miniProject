@@ -32,7 +32,7 @@ def load_cars_train():
 
 # nn
 epochs = 20
-lr_start = 1e-5
+lr_start = 1e-3
 
 X_train, Y_train = load_cars_train()
 X_train = np.reshape(X_train,(-1,32,32,3))
