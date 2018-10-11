@@ -11,7 +11,7 @@ from keras.layers import Flatten
 from keras.optimizers import SGD, Adam, RMSprop
 from keras.callbacks import LearningRateScheduler
 from keras.utils import np_utils,to_categorical
-from keras.applications.mobilenet import MobileNet
+from keras.applications.vgg16 import VGG16
 from keras.losses import squared_hinge
 
 def load_cars_train():
@@ -21,12 +21,6 @@ def load_cars_train():
     with open(file,'rb') as fo:
         dict = pickle.load(fo,encoding='bytes')
     return  np.array(dict[b'data']), np.array(dict[b'labels'])
-
-
-
-
-
-
 
 
 
@@ -43,7 +37,7 @@ print(Y_train.shape)
 
 
 input = Input(shape=(32,32,3),name="inputs0")
-model = MobileNet(input_shape=(32,32,3),weights=None,include_top=None)(input)
+model = VGG16(input_shape=(32,32,3),weights=None,include_top=None)(input)
 model = Flatten()(model)
 model = Dense(1024, name='dense1',activation='relu')(model)
 model = BatchNormalization(name='bn666')(model)
