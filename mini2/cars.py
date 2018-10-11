@@ -59,7 +59,7 @@ print(Y_train.shape)
 
 model = Sequential()
 model.add(Conv2D(32, (3, 3), padding='same',
-                 input_shape=x_train.shape[1:]))
+                 input_shape=X_train.shape[1:]))
 model.add(Activation('relu'))
 model.add(Conv2D(32, (3, 3)))
 model.add(Activation('relu'))
