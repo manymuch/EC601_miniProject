@@ -29,29 +29,44 @@ epochs = 20
 lr_start = 1e-3
 
 X_train, Y_train = load_cars_train()
-X_train = np.reshape(X_train,(-1,32,32,3))
+X_train = np.reshape(X_train,(-1,32,32,3))/255.0
 Y_train = to_categorical(Y_train, num_classes=10)
 
 print(X_train.shape)
 print(Y_train.shape)
 
 
-input = Input(shape=(32,32,3),name="inputs0")
-model = VGG16(input_shape=(32,32,3),weights=None,include_top=None)(input)
-model = Flatten()(model)
-model = Dense(1024, name='dense1',activation='relu')(model)
-model = BatchNormalization(name='bn666')(model)
-model = Dense(1024, name='dense2',activation='relu')(model)
-model = BatchNormalization(name='bn777')(model)
-model = Dense(10,name='last')(model)
-mobile_model = Model(inputs=[input],outputs=[model])
+model = Sequential()
+model.add(Conv2D(32, (3, 3), padding='same',
+                 input_shape=X_train.shape[1:]))
+model.add(Activation('relu'))
+model.add(Conv2D(32, (3, 3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
+model.add(Conv2D(64, (3, 3), padding='same'))
+model.add(Activation('relu'))
+model.add(Conv2D(64, (3, 3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
+model.add(Flatten())
+model.add(Dense(512))
+model.add(Activation('relu'))
+model.add(Dropout(0.5))
+model.add(Dense(num_classes))
+model.add(Activation('softmax'))
 
 
-opt = Adam(lr=lr_start)
-mobile_model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
+opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
+model.compile(loss='categorical_crossentropy',
+              optimizer=opt,
+              metrics=['accuracy'])
 mobile_model.summary()
 
-history = mobile_model.fit(X_train, Y_train,
+history = model.fit(X_train, Y_train,
                     batch_size=32,
                     #steps_per_epoch = 100,
                     epochs=epochs,
