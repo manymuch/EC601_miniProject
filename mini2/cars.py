@@ -72,7 +72,7 @@ mobile_model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
 mobile_model.summary()
 
 history = mobile_model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
-                    steps_per_epoch=len(x_train) / 32,
+                    steps_per_epoch=len(X_train) / 32,
                     epochs=epochs,
                     verbose=1)
 #score = model.evaluate(X_test, Y_test, verbose=0)
