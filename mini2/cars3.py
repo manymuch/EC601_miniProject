@@ -5,13 +5,12 @@ np.random.seed(1337)  # for reproducibility
 
 import keras.backend as K
 from keras.models import Sequential, Model
-from keras.layers import Dense, Dropout, Activation, BatchNormalization, MaxPooling2D,Input
+from keras.layers import Conv2D, Dense, Dropout, Activation, BatchNormalization, MaxPooling2D,Input
 
 from keras.layers import Flatten
 from keras.optimizers import SGD, Adam, RMSprop
 from keras.callbacks import LearningRateScheduler
 from keras.utils import np_utils,to_categorical
-from keras.applications.vgg16 import VGG16
 from keras.losses import squared_hinge
 
 def load_cars_train():
