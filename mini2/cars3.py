@@ -10,7 +10,7 @@ from keras.layers import Dense, Dropout, Activation, BatchNormalization, MaxPool
 from keras.layers import Flatten
 from keras.optimizers import SGD, Adam, RMSprop
 from keras.callbacks import LearningRateScheduler
-from keras.utils import np_utils
+from keras.utils import np_utils,to_categorical
 from keras.applications.mobilenet import MobileNet
 from keras.losses import squared_hinge
 
@@ -36,7 +36,7 @@ lr_start = 1e-5
 
 X_train, Y_train = load_cars_train()
 X_train = np.reshape(X_train,(-1,32,32,3))
-Y_train = K.one_hot(Y_train,10)
+Y_train = to_categorical(Y_train, num_classes=10)
 
 print(X_train.shape)
 print(Y_train.shape)
