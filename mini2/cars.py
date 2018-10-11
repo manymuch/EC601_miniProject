@@ -54,8 +54,8 @@ print(X_train.shape)
 print(Y_train.shape)
 
 
-
-model = MobileNet(input_shape=(32,32,3),weights=None,include_top=None)
+input = Input(shape=(32,32,3),name="inputs0")
+model = MobileNet(input_shape=(32,32,3),weights=None,include_top=None)(input)
 model = Dense(1024, name='dense1')(model)
 model = Dense(1024, name='dense2')(model)
 model = Dense(10,name='last')(model)
