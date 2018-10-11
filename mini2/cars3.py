@@ -8,7 +8,7 @@ from keras.models import Sequential, Model
 from keras.layers import Conv2D, Dense, Dropout, Activation, BatchNormalization, MaxPooling2D,Input
 
 from keras.layers import Flatten
-from keras.optimizers import SGD, Adam, RMSprop
+from keras.optimizers import SGD, Adam,rmsprop
 from keras.callbacks import LearningRateScheduler
 from keras.utils import np_utils,to_categorical
 from keras.losses import squared_hinge
@@ -59,7 +59,7 @@ model.add(Dense(10))
 model.add(Activation('softmax'))
 
 
-opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
+opt = rmsprop(lr=0.0001, decay=1e-6)
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
