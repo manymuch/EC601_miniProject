@@ -20,6 +20,7 @@ def load_cars_train():
     file = os.path.join(data_dir,"data_batch_1")
     with open(file,'rb') as fo:
         dict = pickle.load(fo,encoding='bytes')
+    print(dict)
     return  np.array(dict['data']), np.array(dict['labels'])
 
 
