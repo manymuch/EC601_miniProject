@@ -26,16 +26,12 @@ def load_cars_train():
 
 
 
-parser = argparse.ArgumentParser(description='indicate the numbers of epoch and batchsize')
-parser.add_argument('--epochs', type=int, default = 1)
-parser.add_argument('--batchsize', type=int, default = 50)
-args = parser.parse_args()
+
 
 
 
 # nn
-batch_size = args.batchsize
-epochs = args.epochs
+epochs = 1
 lr_start = 1e-5
 
 X_train, Y_train = load_cars_train()
