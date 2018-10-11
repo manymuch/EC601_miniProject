@@ -22,15 +22,6 @@ def load_cars_train():
         dict = pickle.load(fo)
     return  np.array(dict['data']), np.array(dict['labels'])
 
-def load_cars_test():
-    data_dir = "./../data/cars"
-    ImageNpz = os.path.join(data_dir,"MNIST_test_images.npz")
-    LabelNpz = os.path.join(data_dir,"MNIST_test_labels.npz")
-
-    image = np.load(ImageNpz)["arr_0"]
-    label = np.load(LabelNpz)["arr_0"]
-
-    return image, label
 
 
 
