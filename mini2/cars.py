@@ -82,10 +82,10 @@ model.add(Activation('softmax'))
 
 
 opt = Adam(lr=lr_start)
-mobile_model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
-mobile_model.summary()
+model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
+model.summary()
 
-history = mobile_model.fit(X_train, Y_train,
+history = model.fit(X_train, Y_train,
                     batch_size=batch_size,
                     #steps_per_epoch=100,
                     epochs=epochs,
