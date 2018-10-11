@@ -31,7 +31,7 @@ def load_cars_train():
 
 
 # nn
-epochs = 1
+epochs = 20
 lr_start = 1e-5
 
 X_train, Y_train = load_cars_train()
