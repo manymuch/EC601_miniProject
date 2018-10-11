@@ -59,12 +59,14 @@ model = MobileNet(input_shape=(32,32,3),weights=None,include_top=None)(input)
 model = Dense(1024, name='dense1')(model)
 model = Dense(1024, name='dense2')(model)
 model = Dense(10,name='last')(model)
+mobile_model = Model(inputs=[input],outputs=[model])
+
 
 opt = Adam(lr=lr_start)
-model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
-model.summary()
+mobile_model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
+mobile_model.summary()
 
-history = model.fit(X_train, Y_train,
+history = mobile_model.fit(X_train, Y_train,
                     batch_size=batch_size,
                     epochs=epochs,
                     verbose=1)
