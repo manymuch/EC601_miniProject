@@ -63,7 +63,7 @@ opt = rmsprop(lr=0.0001, decay=1e-6)
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
-mobile_model.summary()
+model.summary()
 
 history = model.fit(X_train, Y_train,
                     batch_size=32,
