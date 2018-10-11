@@ -6,8 +6,8 @@ import cPickle
 np.random.seed(1337)  # for reproducibility
 
 import keras.backend as K
-from keras.models import Sequential
-from keras.layers import Conv2D, Dense, Dropout, Activation, BatchNormalization, MaxPooling2D
+from keras.models import Sequential, Model
+from keras.layers import Dense, Dropout, Activation, BatchNormalization, MaxPooling2D,Input
 
 from keras.layers import Flatten
 from keras.optimizers import SGD, Adam, RMSprop
@@ -50,44 +50,28 @@ epochs = args.epochs
 lr_start = 1e-5
 
 X_train, Y_train = load_cars_train()
-X_train = np.reshape(X_train,(-1,32,32,3)).astype('float32')/255.0
+X_train = np.reshape(X_train,(-1,32,32,3))
 Y_train = K.one_hot(Y_train,10)
 
 print(X_train.shape)
 print(Y_train.shape)
 
 
-model = Sequential()
-model.add(Conv2D(32, (3, 3), padding='same',
-                 input_shape=X_train.shape[1:]))
-model.add(Activation('relu'))
-model.add(Conv2D(32, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-
-model.add(Conv2D(64, (3, 3), padding='same'))
-model.add(Activation('relu'))
-model.add(Conv2D(64, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-
-model.add(Flatten())
-model.add(Dense(512))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(10))
-model.add(Activation('softmax'))
+input = Input(shape=(32,32,3),name="inputs0")
+model = MobileNet(input_shape=(32,32,3),weights=None,include_top=None)(input)
+model = Flatten()(model)
+model = Dense(1024, name='dense1')(model)
+model = Dense(1024, name='dense2')(model)
+model = Dense(10,name='last')(model)
+mobile_model = Model(inputs=[input],outputs=[model])
 
 
 opt = Adam(lr=lr_start)
-model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
-model.summary()
+mobile_model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
+mobile_model.summary()
 
-history = model.fit(X_train, Y_train,
+history = mobile_model.fit(X_train, Y_train,
                     batch_size=batch_size,
-                    #steps_per_epoch=100,
                     epochs=epochs,
                     verbose=1)
 #score = model.evaluate(X_test, Y_test, verbose=0)
