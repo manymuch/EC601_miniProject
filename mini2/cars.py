@@ -8,7 +8,7 @@ np.random.seed(1337)  # for reproducibility
 import keras.backend as K
 from keras.models import Sequential, Model
 from keras.layers import Dense, Dropout, Activation, BatchNormalization, MaxPooling2D,Input
-from keras.preprocessing.image import ImageDataGenerator
+
 from keras.layers import Flatten
 from keras.optimizers import SGD, Adam, RMSprop
 from keras.callbacks import LearningRateScheduler
@@ -35,8 +35,6 @@ def load_cars_test():
     return image, label
 
 
-
-datagen = ImageDataGenerator()
 
 
 parser = argparse.ArgumentParser(description='indicate the numbers of epoch and batchsize')
@@ -71,8 +69,8 @@ opt = Adam(lr=lr_start)
 mobile_model.compile(loss=squared_hinge, optimizer=opt, metrics=['acc'])
 mobile_model.summary()
 
-history = mobile_model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
-                    steps_per_epoch=len(X_train) / 32,
+history = mobile_model.fit(X_train, Y_train,
+                    batch_size=batch_size,
                     epochs=epochs,
                     verbose=1)
 #score = model.evaluate(X_test, Y_test, verbose=0)
