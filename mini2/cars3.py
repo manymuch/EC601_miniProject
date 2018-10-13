@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import pickle
+import argparse
 np.random.seed(1337)  # for reproducibility
 
 import keras.backend as K
@@ -13,6 +14,20 @@ from keras.callbacks import LearningRateScheduler
 from keras.utils import np_utils,to_categorical
 from keras.losses import squared_hinge
 
+parser = argparse.ArgumentParser(description = 'neural network training parameters')
+parser.add_argument('-epochs',action='store', dest='epochs',type=int, default=1)
+parser.add_argument('-lr_start',action='store', dest='lr_start',type=float, default=1e-3)
+
+
+epochs = parser.parse_args('-epochs')
+lr_start = parser.parse_args('-lr_start')
+print("total training epochs = "+str(epochs))
+
+
+
+
+
+
 def load_cars_train():
     data_dir = "./../../data/cifar10"
 
@@ -24,7 +39,6 @@ def load_cars_train():
 
 
 # nn
-epochs = 20
 lr_start = 1e-3
 
 X_train, Y_train = load_cars_train()
