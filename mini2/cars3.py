@@ -18,11 +18,19 @@ parser = argparse.ArgumentParser(description = 'neural network training paramete
 parser.add_argument('--epochs',action="store",type=int, default=1)
 parser.add_argument('--lr_start',action="store",type=float, default=1e-3)
 parser.add_argument('--batch_size',action="store",type=int, default=64)
+parser.add_argument('--weights_path',action="store",type=str, default="cars3_weights.npz")
+parser.add_argument('--weights_path',action="store",type=str, default="cars3_weights.npz")
+parser.add_argument('--train',action="store_true")
+parser.add_argument('--test',action="store_true")
+
 args = parser.parse_args()
 
 epochs = args.epochs
 lr_start = args.lr_start
 batch_size = args.batch_size
+weights_path = args.weights_path
+train = args.train
+test = args.test
 print("total training epochs = "+str(epochs))
 print("learning rate start = "+str(lr_start))
 print("batch_size = "+str(batch_size))
@@ -113,17 +121,29 @@ opt = Adam(lr=lr_start, decay=1e-6)
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
-model.summary()
 
-history = model.fit(X_train, Y_train,
-                    batch_size=batch_size,
-                    epochs=epochs,
-                    verbose=1)
+if train:
+    history = model.fit(X_train, Y_train,
+                        batch_size=batch_size,
+                        epochs=epochs,
+                        verbose=1)
+    #save parameters
+    weights = model.get_weights()
+    np.savez(weights_path,weights)
 
-#loading test data
-X_test, Y_test = load_cars_test()
-X_test, Y_test = preprocess(X_test, Y_test)
 
 
-score,acc = model.evaluate(X_test, Y_test, batch_size=50,verbose=0)
-print("testing accuracy = "+str(acc*100)+"%")
+if test:
+    #load parameters
+    try:
+        npz = np.load(weights_path)
+    except:
+        print("there is no saved parameters, please train the model first")
+        exit()
+
+    model.set_weights(npz)
+    #loading test data
+    X_test, Y_test = load_cars_test()
+    X_test, Y_test = preprocess(X_test, Y_test)
+    score,acc = model.evaluate(X_test, Y_test, batch_size=50,verbose=0)
+    print("testing accuracy = "+str(acc*100)+"%")
