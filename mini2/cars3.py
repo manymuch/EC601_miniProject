@@ -46,7 +46,7 @@ def load_cars_train():
         new_labels = np.array(dict[b'labels'])
         data = np.concatenate((data,new_data))
         labels = np.concatenate((labels,new_labels))
-    return  data, labels
+    return  (data, labels)
 
 def load_cars_test():
 
@@ -56,8 +56,8 @@ def load_cars_test():
         dict = pickle.load(fo,encoding='bytes')
     data = np.array(dict[b'data'])
     labels = np.array(dict[b'labels'])
-    return  data, labels
-def preprocess(X,Y):
+    return  (data, labels)
+def preprocess((X,Y)):
     X = np.reshape(X,(-1,32,32,3))/255.0
     Y = to_categorical(Y, num_classes=10)
 X_train, Y_train = preprocess(load_cars_train())
