@@ -31,12 +31,14 @@ print("batch_size = "+str(batch_size))
 
 
 def load_cars_train():
-    data = np.array([])
-    labels = np.array([])
-
 
     data_dir = "./../../data/cifar10"
-    for i in range(1,6):
+    file = os.path.join(data_dir,"data_batch_1")
+    with open(file,'rb') as fo:
+        dict = pickle.load(fo,encoding='bytes')
+    data = np.array(dict[b'data'])
+    labels = np.array(dict[b'labels'])
+    for i in range(2,6):
         file = os.path.join(data_dir,"data_batch_"+str(i))
         with open(file,'rb') as fo:
             dict = pickle.load(fo,encoding='bytes')
