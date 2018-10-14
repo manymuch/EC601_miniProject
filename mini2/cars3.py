@@ -16,15 +16,16 @@ from keras.losses import squared_hinge
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
 parser.add_argument('--epochs',action="store",type=int, default=1)
-parser.add_argument('--lr_start',type=float, default=1e-3)
+parser.add_argument('--lr_start',action="store",type=float, default=1e-3)
+parser.add_argument('--batch_size',action="store",type=int, default=64)
 args = parser.parse_args()
 
 epochs = args.epochs
 lr_start = args.lr_start
+batch_size = args.batch_size
 print("total training epochs = "+str(epochs))
 print("learning rate start = "+str(lr_start))
-
-
+print("batch_size = "+str(batch_size))
 
 
 
@@ -38,38 +39,51 @@ def load_cars_train():
     return  np.array(dict[b'data']), np.array(dict[b'labels'])
 
 
-
-# nn
-lr_start = 1e-3
-
 X_train, Y_train = load_cars_train()
 X_train = np.reshape(X_train,(-1,32,32,3))/255.0
 Y_train = to_categorical(Y_train, num_classes=10)
 
-print(X_train.shape)
-print(Y_train.shape)
 
 
 model = Sequential()
+
+#Conv1
 model.add(Conv2D(32, (3, 3), padding='same',
                  input_shape=X_train.shape[1:]))
 model.add(Activation('relu'))
+#Conv2
 model.add(Conv2D(32, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
-
+#Conv3
 model.add(Conv2D(64, (3, 3), padding='same'))
 model.add(Activation('relu'))
+#Conv4
 model.add(Conv2D(64, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
+#Conv5
+model.add(Conv2D(128, (3, 3), padding='same'))
+model.add(Activation('relu'))
+#Conv6
+model.add(Conv2D(128, (3, 3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
 model.add(Flatten())
+
+model.add(Dense(1024))
+model.add(Activation('relu'))
+model.add(Dropout(0.5))
+
 model.add(Dense(512))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
+
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
@@ -81,8 +95,7 @@ model.compile(loss='categorical_crossentropy',
 model.summary()
 
 history = model.fit(X_train, Y_train,
-                    batch_size=32,
-                    #steps_per_epoch = 100,
+                    batch_size=batch_size,
                     epochs=epochs,
                     verbose=1)
 #score = model.evaluate(X_test, Y_test, verbose=0)
