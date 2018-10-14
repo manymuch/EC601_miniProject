@@ -19,8 +19,8 @@ parser.add_argument('--epochs',action='store',type=int, default=1)
 parser.add_argument('--lr_start',action='store',type=float, default=1e-3)
 
 
-epochs = parser.parse_args('-epochs')
-lr_start = parser.parse_args('-lr_start')
+epochs = parser.parse_args('--epochs')
+lr_start = parser.parse_args('--lr_start')
 print("total training epochs = "+str(epochs))
 
 
