@@ -31,18 +31,27 @@ print("batch_size = "+str(batch_size))
 
 
 def load_cars_train():
-    data_dir = "./../../data/cifar10"
+    data = np.array([])
+    labels = np.array([])
 
-    file = os.path.join(data_dir,"data_batch_1")
-    with open(file,'rb') as fo:
-        dict = pickle.load(fo,encoding='bytes')
-    return  np.array(dict[b'data']), np.array(dict[b'labels'])
+
+    data_dir = "./../../data/cifar10"
+    for i in range(1,6):
+        file = os.path.join(data_dir,"data_batch_"+str(i))
+        with open(file,'rb') as fo:
+            dict = pickle.load(fo,encoding='bytes')
+        new_data = np.array(dict[b'data'])
+        new_labels = np.array(dict[b'labels'])
+        data = np.concatenate((data,new_data))
+        labels = np.concatenate((labels,new_labels))
+    return  data, labels
 
 
 X_train, Y_train = load_cars_train()
 X_train = np.reshape(X_train,(-1,32,32,3))/255.0
 Y_train = to_categorical(Y_train, num_classes=10)
-
+print(X_train.shape)
+print(Y_train.shape)
 
 
 model = Sequential()
