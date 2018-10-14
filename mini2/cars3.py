@@ -97,7 +97,7 @@ model.add(Dense(10))
 model.add(Activation('softmax'))
 
 
-opt = rmsprop(lr=lr_start, decay=1e-6)
+opt = Adam(lr=lr_start, decay=1e-6)
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
