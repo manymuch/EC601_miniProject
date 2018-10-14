@@ -112,10 +112,12 @@ model.add(Flatten())
 model.add(Dense(1024))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
+model.add(Dropout(0.25))
 
 model.add(Dense(512))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
+model.add(Dropout(0.25))
 
 model.add(Dense(10))
 model.add(Activation('softmax'))
