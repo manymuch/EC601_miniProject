@@ -35,7 +35,7 @@ print("learning rate start = "+str(lr_start))
 print("batch_size = "+str(batch_size))
 print(train)
 print(test)
-
+exit()
 
 
 
