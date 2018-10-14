@@ -15,8 +15,8 @@ from keras.utils import np_utils,to_categorical
 from keras.losses import squared_hinge
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
-parser.add_argument('-epochs',action='store', dest='epochs',type=int, default=1)
-parser.add_argument('-lr_start',action='store', dest='lr_start',type=float, default=1e-3)
+parser.add_argument('--epochs',action='store',type=int, default=1)
+parser.add_argument('--lr_start',action='store',type=float, default=1e-3)
 
 
 epochs = parser.parse_args('-epochs')
