@@ -21,6 +21,8 @@ parser.add_argument('--batch_size',action="store",type=int, default=64)
 parser.add_argument('--weights_path',action="store",type=str, default="cars3_weights.npz")
 parser.add_argument('--train',action="store_true")
 parser.add_argument('--test',action="store_true")
+parser.add_argument('--retrain',action="store_true")
+
 
 args = parser.parse_args()
 
@@ -30,13 +32,16 @@ batch_size = args.batch_size
 weights_path = args.weights_path
 train = args.train
 test = args.test
+retrain = args.retrain
 print("total training epochs = "+str(epochs))
 print("learning rate start = "+str(lr_start))
 print("batch_size = "+str(batch_size))
-if (train is False) and (test is False):
-    print("please using --train and --test to specify whether to train or test the model")
+if (train is False) and (test is False) and (retrain is False):
+    print("please using --train, --retrain and --test to specify whether to train or test the model")
     exit()
-
+if (train is True) and (retrain is True):
+    print("you can just train or retrain the model, can not do both")
+    exit()
 
 
 def load_cars_train():
@@ -69,8 +74,7 @@ def preprocess(X,Y):
     X = np.reshape(X,(-1,32,32,3))/255.0
     Y = to_categorical(Y, num_classes=10)
     return X, Y
-X_train, Y_train = load_cars_train()
-X_train, Y_train = preprocess(X_train, Y_train)
+
 
 
 
@@ -124,6 +128,9 @@ model.compile(loss='categorical_crossentropy',
               metrics=['accuracy'])
 
 if train:
+    print("training from scrath")
+    X_train, Y_train = load_cars_train()
+    X_train, Y_train = preprocess(X_train, Y_train)
     history = model.fit(X_train, Y_train,
                         batch_size=batch_size,
                         epochs=epochs,
@@ -133,7 +140,21 @@ if train:
     np.savez(weights_path,weights)
     print("parameters have been saved to "+str(weights_path))
 
-
+if retrain:
+    #load parameters
+    try:
+        npz = np.load(weights_path)["arr_0"]
+    except:
+        print("there is no saved parameters, please train the model first")
+        exit()
+    X_train, Y_train = load_cars_train()
+    X_train, Y_train = preprocess(X_train, Y_train)
+    print("loading parameters from "+str(weights_path)+", and retrain")
+    model.set_weights(npz)
+    history = model.fit(X_train, Y_train,
+                        batch_size=batch_size,
+                        epochs=epochs,
+                        verbose=1)
 
 if test:
     #load parameters
