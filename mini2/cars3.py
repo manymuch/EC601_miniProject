@@ -83,7 +83,7 @@ model = Sequential()
 
 #Conv1
 model.add(Conv2D(32, (3, 3), padding='same',
-                 input_shape=X_train.shape[1:]))
+                 input_shape=[32,32,3]))
 model.add(Activation('relu'))
 #Conv2
 model.add(Conv2D(32, (3, 3)))
