@@ -119,9 +119,13 @@ history = model.fit(X_train, Y_train,
                     batch_size=batch_size,
                     epochs=epochs,
                     verbose=1)
+
+#loading test data
 X_test, Y_test = load_cars_test()
 X_test, Y_test = preprocess(X_test, Y_test)
 
 
-score = model.evaluate(X_test, Y_test, verbose=0)
+score = model.evaluate(X_test, Y_test, batch_size=50,verbose=0)
+print(score.shape)
+exit()
 print("testing accuracy = "+str(score*100)+"%")
