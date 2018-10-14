@@ -19,7 +19,6 @@ parser.add_argument('--epochs',action="store",type=int, default=1)
 parser.add_argument('--lr_start',action="store",type=float, default=1e-3)
 parser.add_argument('--batch_size',action="store",type=int, default=64)
 parser.add_argument('--weights_path',action="store",type=str, default="cars3_weights.npz")
-parser.add_argument('--weights_path',action="store",type=str, default="cars3_weights.npz")
 parser.add_argument('--train',action="store_true")
 parser.add_argument('--test',action="store_true")
 
