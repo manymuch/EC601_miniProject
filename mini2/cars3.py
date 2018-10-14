@@ -52,8 +52,6 @@ def load_cars_train():
 X_train, Y_train = load_cars_train()
 X_train = np.reshape(X_train,(-1,32,32,3))/255.0
 Y_train = to_categorical(Y_train, num_classes=10)
-print(X_train.shape)
-print(Y_train.shape)
 
 
 model = Sequential()
@@ -99,7 +97,7 @@ model.add(Dense(10))
 model.add(Activation('softmax'))
 
 
-opt = rmsprop(lr=0.0001, decay=1e-6)
+opt = rmsprop(lr=lr_start, decay=1e-6)
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
