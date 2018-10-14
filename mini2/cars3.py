@@ -130,7 +130,7 @@ if train:
                         verbose=1)
     #save parameters
     weights = model.get_weights()
-    np.savez(weights_path,*weights)
+    np.savez(weights_path,weights)
     print("parameters have been saved to "+str(weights_path))
 
 
@@ -138,7 +138,7 @@ if train:
 if test:
     #load parameters
     try:
-        npz = np.load(weights_path)
+        npz = np.load(weights_path)["arr_0"]
     except:
         print("there is no saved parameters, please train the model first")
         exit()
