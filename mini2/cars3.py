@@ -123,5 +123,5 @@ X_test, Y_test = load_cars_test()
 X_test, Y_test = preprocess(X_test, Y_test)
 
 
-score = model.evaluate(X_test, Y_test, verbose=1)
+score = model.evaluate(X_test, Y_test, verbose=0)
 print(score)
