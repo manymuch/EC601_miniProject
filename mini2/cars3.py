@@ -60,12 +60,10 @@ def load_cars_test():
 def preprocess(X,Y):
     X = np.reshape(X,(-1,32,32,3))/255.0
     Y = to_categorical(Y, num_classes=10)
+    return X, Y
 X_train, Y_train = load_cars_train()
-print(X_train.shape)
-print(Y_train.shape)
-
 X_train, Y_train = preprocess(X_train, Y_train)
-exit()
+
 
 
 
