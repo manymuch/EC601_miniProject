@@ -31,7 +31,6 @@ print("batch_size = "+str(batch_size))
 
 
 def load_cars_train():
-
     data_dir = "./../../data/cifar10"
     file = os.path.join(data_dir,"data_batch_1")
     with open(file,'rb') as fo:
@@ -120,7 +119,7 @@ history = model.fit(X_train, Y_train,
                     batch_size=batch_size,
                     epochs=epochs,
                     verbose=1)
-X_test, Y_test = load_cars_train()
+X_test, Y_test = load_cars_test()
 X_test, Y_test = preprocess(X_test, Y_test)
 
 
