@@ -17,7 +17,7 @@ from keras.losses import squared_hinge
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
 parser.add_argument('epochs',type=int, default=1)
 parser.add_argument('lr_start',type=float, default=1e-3)
-args = parse.parse_args()
+args = parser.parse_args()
 
 epochs = args.epochs
 lr_start = args.lr_start
