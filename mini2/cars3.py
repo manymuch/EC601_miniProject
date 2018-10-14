@@ -48,10 +48,21 @@ def load_cars_train():
         labels = np.concatenate((labels,new_labels))
     return  data, labels
 
+def load_cars_test():
 
-X_train, Y_train = load_cars_train()
-X_train = np.reshape(X_train,(-1,32,32,3))/255.0
-Y_train = to_categorical(Y_train, num_classes=10)
+    data_dir = "./../../data/cifar10"
+    file = os.path.join(data_dir,"test_batch")
+    with open(file,'rb') as fo:
+        dict = pickle.load(fo,encoding='bytes')
+    data = np.array(dict[b'data'])
+    labels = np.array(dict[b'labels'])
+    return  data, labels
+def preprocess(X,Y):
+    X = np.reshape(X,(-1,32,32,3))/255.0
+    Y = to_categorical(Y, num_classes=10)
+X_train, Y_train = preprocess(load_cars_train())
+
+
 
 
 model = Sequential()
@@ -107,4 +118,8 @@ history = model.fit(X_train, Y_train,
                     batch_size=batch_size,
                     epochs=epochs,
                     verbose=1)
-#score = model.evaluate(X_test, Y_test, verbose=0)
+X_test, Y_test = preprocess(load_cars_test())
+
+
+score = model.evaluate(X_test, Y_test, verbose=1)
+print(score)
