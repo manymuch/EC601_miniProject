@@ -155,6 +155,10 @@ if retrain:
                         batch_size=batch_size,
                         epochs=epochs,
                         verbose=1)
+    #save parameters
+    weights = model.get_weights()
+    np.savez(weights_path,weights)
+    print("parameters have been saved to "+str(weights_path))
 
 if test:
     #load parameters
