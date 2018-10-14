@@ -33,9 +33,9 @@ test = args.test
 print("total training epochs = "+str(epochs))
 print("learning rate start = "+str(lr_start))
 print("batch_size = "+str(batch_size))
-print(train)
-print(test)
-exit()
+if (train is False) and (test is False):
+    print("please using --train and --test to specify whether to train or test the model")
+    exit()
 
 
 
@@ -131,6 +131,7 @@ if train:
     #save parameters
     weights = model.get_weights()
     np.savez(weights_path,weights)
+    print("parameters have been saved to "+str(weights_path))
 
 
 
