@@ -124,4 +124,4 @@ X_test, Y_test = preprocess(X_test, Y_test)
 
 
 score = model.evaluate(X_test, Y_test, verbose=0)
-print(score)
+print("testing accuracy = "+str(score*100)+"%")
