@@ -174,4 +174,4 @@ if test:
     X_test, Y_test = load_cars_test()
     X_test, Y_test = preprocess(X_test, Y_test)
     _, acc = model.evaluate(X_test, Y_test, batch_size=50,verbose=0)
-    print("testing accuracy = {:.3f}%".format(acc))
+    print("testing accuracy = {:.4f}%".format(acc*100))
