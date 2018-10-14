@@ -130,7 +130,7 @@ if train:
                         verbose=1)
     #save parameters
     weights = model.get_weights()
-    np.savez(weights_path,weights)
+    np.savez(weights_path,*weights)
     print("parameters have been saved to "+str(weights_path))
 
 
@@ -144,6 +144,7 @@ if test:
         exit()
 
     model.set_weights(npz)
+    print("parameters load from "+str(weights_path))
     #loading test data
     X_test, Y_test = load_cars_test()
     X_test, Y_test = preprocess(X_test, Y_test)
