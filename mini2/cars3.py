@@ -6,13 +6,9 @@ np.random.seed(1337)  # for reproducibility
 
 import keras.backend as K
 from keras.models import Sequential, Model
-from keras.layers import Conv2D, Dense, Dropout, Activation, BatchNormalization, MaxPooling2D,Input
-
-from keras.layers import Flatten
-from keras.optimizers import SGD, Adam,rmsprop
-from keras.callbacks import LearningRateScheduler
+from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormalization, MaxPooling2D,Input
+from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
-from keras.losses import squared_hinge
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
 parser.add_argument('--epochs',action="store",type=int, default=1)
@@ -85,38 +81,41 @@ model = Sequential()
 model.add(Conv2D(32, (3, 3), padding='same',
                  input_shape=[32,32,3]))
 model.add(Activation('relu'))
+model.add(BatchNormalization())
 #Conv2
 model.add(Conv2D(32, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.25))
+model.add(BatchNormalization())
 #Conv3
 model.add(Conv2D(64, (3, 3), padding='same'))
 model.add(Activation('relu'))
+model.add(BatchNormalization())
 #Conv4
 model.add(Conv2D(64, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.25))
+model.add(BatchNormalization())
 
 #Conv5
 model.add(Conv2D(128, (3, 3), padding='same'))
 model.add(Activation('relu'))
+model.add(BatchNormalization())
 #Conv6
 model.add(Conv2D(128, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.25))
+model.add(BatchNormalization())
 
 model.add(Flatten())
 
 model.add(Dense(1024))
 model.add(Activation('relu'))
-#model.add(Dropout(0.5))
+model.add(BatchNormalization())
 
 model.add(Dense(512))
 model.add(Activation('relu'))
-#model.add(Dropout(0.5))
+model.add(BatchNormalization())
 
 model.add(Dense(10))
 model.add(Activation('softmax'))
