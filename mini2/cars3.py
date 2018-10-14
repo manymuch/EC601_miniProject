@@ -57,7 +57,7 @@ def load_cars_test():
     data = np.array(dict[b'data'])
     labels = np.array(dict[b'labels'])
     return  (data, labels)
-def preprocess((X,Y)):
+def preprocess(X,Y):
     X = np.reshape(X,(-1,32,32,3))/255.0
     Y = to_categorical(Y, num_classes=10)
 X_train, Y_train = preprocess(load_cars_train())
