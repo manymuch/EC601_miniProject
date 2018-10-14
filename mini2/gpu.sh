@@ -20,6 +20,6 @@ module load python/3.6.2
 module load cuda/9.1
 module load cudnn/7.1
 module load tensorflow/r1.8
-python cars3.py
+python cars3.py --train --test --epochs=10
 
 #qrsh -P ece601 -l gpus=1 -l gpu_c=3.5
