@@ -125,7 +125,5 @@ X_test, Y_test = load_cars_test()
 X_test, Y_test = preprocess(X_test, Y_test)
 
 
-score = model.evaluate(X_test, Y_test, batch_size=50,verbose=0)
-print(score.shape)
-exit()
-print("testing accuracy = "+str(score*100)+"%")
+score,acc = model.evaluate(X_test, Y_test, batch_size=50,verbose=0)
+print("testing accuracy = "+str(acc*100)+"%")
