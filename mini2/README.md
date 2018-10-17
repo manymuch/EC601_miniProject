@@ -24,3 +24,13 @@ Also, you can continue training on a pretrained parameters using:
 python cars.py --retrain --lr_start=1e-4
 ```
 Remember to adjust learning rate start point by using --lr_start when retraining
+
+
+to test your own jpg images, you can put jpg files in ./images/ and then run:
+```
+python cars.py --test_images --jpg=YOUR_JPG_FILENAME
+```
+by default the --jpg is set to be tesla.jpg, you can test only by:
+```
+python cars.py --test_images
+```
