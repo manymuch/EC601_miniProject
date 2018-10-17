@@ -191,6 +191,6 @@ if test_images:
         print("there is no saved parameters, please train the model first")
         exit()
     datagen = ImageDataGenerator(rescale=1./255)
-    test_generator = ImageDataGenerator.flow_from_directory('./images',target_size=(32,32),batch_size=1,class_mode='binary')
+    test_generator = ImageDataGenerator.flow_from_directory(directory='./images',target_size=(32,32),batch_size=1,class_mode='binary')
     test_result = model.predict_generator(test_generator,verbose=1)
     print(test_result)
