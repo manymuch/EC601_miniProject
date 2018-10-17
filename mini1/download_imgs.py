@@ -13,8 +13,10 @@ import argparse
 
 #twitter_api.py should contain your own auttentications
 #must include consumer_key, consumer_secret, access_key, access_secret
-import twitter_api
-
+from twitter_api import consumer_key as consumer_key
+from twitter_api import consumer_secret as consumer_secret
+from twitter_api import access_key as access_key
+from twitter_api import access_secret as access_secret
 
 def setup_tweetAPI():
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -44,7 +46,11 @@ def get_all_images_url(screen_name, num):
     #authorize twitter, initialize tweepy
     api = setup_tweetAPI()
 
-    tweets = api.user_timeline(screen_name=screen_name,count=10, include_rts=False,exclude_replies=True)
+    try:
+        tweets = api.user_timeline(screen_name=screen_name,count=10, include_rts=False,exclude_replies=True)
+    except:
+        print("this tweet account not available")
+        exit()
 
     assert len(tweets) is not 0, "this twitter account does not have any tweets"
 
