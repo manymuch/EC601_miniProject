@@ -79,7 +79,8 @@ def read_jpg(file):
     from scipy.ndimage import imread
     from scipy.misc import imresize
     raw = (imread("./images/"+str(file)))
-    return imresize(raw,(32,32))
+
+    return np.expand_dims(imresize(raw,(32,32)),axis=0)
 
 
 model = Sequential()
