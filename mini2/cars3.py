@@ -195,7 +195,9 @@ if test_images:
     except:
         print("there is no saved parameters, please train the model first")
         exit()
+    class_list = ["airplane","automobile","bird","cat","deer","dog","frog","horse","ship","truck"]
 
     img1 = read_jpg("tesla.jpg")
-    result = model.predict(img1)
-    print(result)
+    result = model.predict(img1)[0]
+    idx = np.argmax(result)
+    print(class_list[idx])
