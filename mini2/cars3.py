@@ -75,7 +75,11 @@ def preprocess(X,Y):
     return X, Y
 
 
-
+def read_jpg(file):
+    from scipy.ndimage import imread
+    from scipy.misc import imresize
+    raw = (imread("./images/"+str(file)))
+    return imresize(raw,(32,32))
 
 
 model = Sequential()
@@ -190,6 +194,6 @@ if test_images:
     except:
         print("there is no saved parameters, please train the model first")
         exit()
-    from scipy.ndimage import imread
-    image1 = imread("./images/tesla.jpg")
-    print(image1.shape)
+
+    img1 = read_jpg("tesla.jpg")
+    print(img1.shape)
