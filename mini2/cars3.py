@@ -19,6 +19,7 @@ parser.add_argument('--train',action="store_true")
 parser.add_argument('--test',action="store_true")
 parser.add_argument('--retrain',action="store_true")
 parser.add_argument('--test_images',action="store_true")
+parser.add_argument('--jpg',action="store",type=str, default="tesla.jpg")
 
 
 args = parser.parse_args()
@@ -31,6 +32,7 @@ train = args.train
 test = args.test
 retrain = args.retrain
 test_images = args.test_images
+jpg = args.jpg
 print("total training epochs = "+str(epochs))
 print("learning rate start = "+str(lr_start))
 print("batch_size = "+str(batch_size))
@@ -78,8 +80,11 @@ def preprocess(X,Y):
 def read_jpg(file):
     from scipy.ndimage import imread
     from scipy.misc import imresize
-    raw = (imread("./images/"+str(file)))
-
+    try:
+        raw = (imread("./images/"+str(file)))
+    except:
+        print("./images/"+str(file)+" does not exit, please check")
+        exit()
     return np.expand_dims(imresize(raw,(32,32)),axis=0)
 
 
@@ -197,7 +202,7 @@ if test_images:
         exit()
     class_list = ["airplane","automobile","bird","cat","deer","dog","frog","horse","ship","truck"]
 
-    img1 = read_jpg("tesla.jpg")
+    img1 = read_jpg(jpg)
     result = model.predict(img1)[0]
     idx = np.argmax(result)
     print("I guess it belongs to "+str(class_list[idx]))
