@@ -9,7 +9,7 @@ from keras.models import Sequential, Model
 from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormalization, MaxPooling2D,Input
 from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
-
+print("here")
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
 parser.add_argument('--epochs',action="store",type=int, default=1)
 parser.add_argument('--lr_start',action="store",type=float, default=1e-3)
@@ -22,7 +22,7 @@ parser.add_argument('--test_images',action="store_true")
 
 
 args = parser.parse_args()
-print("here")
+
 epochs = args.epochs
 lr_start = args.lr_start
 batch_size = args.batch_size
