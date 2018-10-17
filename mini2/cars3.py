@@ -3,13 +3,13 @@ import os
 import pickle
 import argparse
 np.random.seed(1337)  # for reproducibility
-
+print("here")
 import keras.backend as K
 from keras.models import Sequential, Model
 from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormalization, MaxPooling2D,Input
 from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
-print("here")
+
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
 parser.add_argument('--epochs',action="store",type=int, default=1)
 parser.add_argument('--lr_start',action="store",type=float, default=1e-3)
