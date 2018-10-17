@@ -197,7 +197,5 @@ if test_images:
         exit()
 
     img1 = read_jpg("tesla.jpg")
-    img2 = read_jpg("boat.jpg")
-    imgs = np.concatenate((img1,img2))
-    result = model.predict(imgs)
+    result = model.predict(img1)
     print(result)
