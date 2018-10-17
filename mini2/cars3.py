@@ -8,6 +8,7 @@ from keras.models import Sequential, Model
 from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormalization, MaxPooling2D,Input
 from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
+from keras.preprocessing.image import ImageDataGenerator
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
 parser.add_argument('--epochs',action="store",type=int, default=1)
