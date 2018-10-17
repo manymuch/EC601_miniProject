@@ -18,6 +18,7 @@ parser.add_argument('--weights_path',action="store",type=str, default="cars3_wei
 parser.add_argument('--train',action="store_true")
 parser.add_argument('--test',action="store_true")
 parser.add_argument('--retrain',action="store_true")
+parser.add_argument('--test_images',action="store_true")
 
 
 args = parser.parse_args()
@@ -29,11 +30,12 @@ weights_path = args.weights_path
 train = args.train
 test = args.test
 retrain = args.retrain
+test_images = args.test_images
 print("total training epochs = "+str(epochs))
 print("learning rate start = "+str(lr_start))
 print("batch_size = "+str(batch_size))
-if (train is False) and (test is False) and (retrain is False):
-    print("please using --train, --retrain and --test to specify whether to train or test the model")
+if (train is False) and (test is False) and (retrain is False) and (test_images is False):
+    print("please using --train, --retrain and --test --test_images to specify whether to train or test the model")
     exit()
 if (train is True) and (retrain is True):
     print("you can just train or retrain the model, can not do both")
@@ -66,6 +68,7 @@ def load_cars_test():
     data = np.array(dict[b'data'])
     labels = np.array(dict[b'labels'])
     return  data, labels
+
 def preprocess(X,Y):
     X = np.reshape(X,(-1,32,32,3))/255.0
     Y = to_categorical(Y, num_classes=10)
@@ -168,14 +171,25 @@ if test:
     #load parameters
     try:
         npz = np.load(weights_path)["arr_0"]
+        model.set_weights(npz)
     except:
         print("there is no saved parameters, please train the model first")
         exit()
-
-    model.set_weights(npz)
     print("parameters load from "+str(weights_path))
     #loading test data
     X_test, Y_test = load_cars_test()
     X_test, Y_test = preprocess(X_test, Y_test)
     _, acc = model.evaluate(X_test, Y_test, batch_size=50,verbose=0)
     print("testing accuracy = {:.2f}%".format(acc*100))
+
+if test_images:
+    #load parameters
+    try:
+        npz = np.load(weights_path)["arr_0"]
+        model.set_weights(npz)
+    except:
+        print("there is no saved parameters, please train the model first")
+        exit()
+    datagen = ImageDataGenerator(rescale=1./255)
+    test_generator = ImageDataGenerator.flow_from_directory('images',target_size=(32,32),batch_size=1)
+    model.predict_generator(test_generator,verbose=1)

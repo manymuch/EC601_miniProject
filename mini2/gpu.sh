@@ -2,7 +2,7 @@
 
 #$ -P ece601
 
-# Request 4 CPUs
+# Request 1 CPUs
 #$ -pe omp 1
 
 # Request 1 GPU (the number of GPUs needed should be divided by the number of CPUs requested above)
