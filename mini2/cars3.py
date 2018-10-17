@@ -200,4 +200,4 @@ if test_images:
     img1 = read_jpg("tesla.jpg")
     result = model.predict(img1)[0]
     idx = np.argmax(result)
-    print(class_list[idx])
+    print("I guess it belongs to "+str(class_list[idx]))
