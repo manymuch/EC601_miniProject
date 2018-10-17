@@ -22,7 +22,7 @@ parser.add_argument('--test_images',action="store_true")
 
 
 args = parser.parse_args()
-
+print("here")
 epochs = args.epochs
 lr_start = args.lr_start
 batch_size = args.batch_size
