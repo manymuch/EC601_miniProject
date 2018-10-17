@@ -196,4 +196,5 @@ if test_images:
         exit()
 
     img1 = read_jpg("tesla.jpg")
-    print(img1.shape)
+    result = model.predict(img1)
+    print(result)
