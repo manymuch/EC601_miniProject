@@ -130,7 +130,7 @@ model.add(Activation('relu'))
 model.add(BatchNormalization())
 model.add(Dropout(0.5))
 
-model.add(Dense(512))
+model.add(Dense(1024))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
 model.add(Dropout(0.5))
