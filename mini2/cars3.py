@@ -87,27 +87,12 @@ def read_jpg(file):
     except:
         print("./images/"+str(file)+" does not exit, please check")
         exit()
-    return np.expand_dims(imresize(raw,(32,32))/255.,axis=0)
+    return np.expand_dims(imresize(raw,(32,32)),axis=0)
 
 
 model = Sequential()
 
 model.add(MobileNet(input_shape=(32,32,3),weights=None,classes=10))
-
-# model.add(Flatten())
-#
-# model.add(Dense(1024))
-# model.add(Activation('relu'))
-# model.add(BatchNormalization())
-# model.add(Dropout(0.5))
-#
-# model.add(Dense(512))
-# model.add(Activation('relu'))
-# model.add(BatchNormalization())
-# model.add(Dropout(0.5))
-#
-# model.add(Dense(10))
-# model.add(Activation('softmax'))
 
 
 opt = Adam(lr=lr_start, decay=1e-6)
