@@ -9,7 +9,7 @@ from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormal
 from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
 from keras.preprocessing.image import ImageDataGenerator
-from keras.applications.mobilenetv2 import MobileNetV2
+from keras.applications.mobilenet import MobileNet
 
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
@@ -92,7 +92,7 @@ def read_jpg(file):
 
 model = Sequential()
 
-model.add(MobileNetV2(input_shape=(32,32,3),weights=None,classes=10))
+model.add(MobileNet(input_shape=(32,32,3),weights=None,classes=10))
 
 # model.add(Flatten())
 #
