@@ -204,5 +204,6 @@ if test_images:
 
     img1 = read_jpg(jpg)
     result = model.predict(img1)[0]
+    print(result)
     idx = np.argmax(result)
     print("I guess it belongs to "+str(class_list[idx]))
