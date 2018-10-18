@@ -9,7 +9,7 @@ from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormal
 from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
 from keras.preprocessing.image import ImageDataGenerator
-from keras.applications.mobilenet import MobileNet
+from keras.applications.densenet import DenseNet121
 
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
@@ -87,12 +87,12 @@ def read_jpg(file):
     except:
         print("./images/"+str(file)+" does not exit, please check")
         exit()
-    return np.expand_dims(imresize(raw,(32,32)),axis=0)
+    return np.expand_dims(imresize(raw,(32,32))/255.,axis=0)
 
 
 model = Sequential()
 
-model.add(MobileNet(input_shape=(32,32,3),weights=None,classes=10))
+model.add(DenseNet121(input_shape=(32,32,3),weights=None,classes=10))
 
 
 opt = Adam(lr=lr_start, decay=1e-6)
