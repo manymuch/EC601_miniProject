@@ -9,6 +9,8 @@ from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormal
 from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
 from keras.preprocessing.image import ImageDataGenerator
+from keras.applications.mobilenetv2 import MobileNetV2
+
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
 parser.add_argument('--epochs',action="store",type=int, default=1)
@@ -90,53 +92,22 @@ def read_jpg(file):
 
 model = Sequential()
 
-#Conv1
-model.add(Conv2D(32, (3, 3), padding='same',
-                 input_shape=[32,32,3]))
-model.add(Activation('relu'))
-model.add(BatchNormalization())
-#Conv2
-model.add(Conv2D(32, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(BatchNormalization())
-model.add(Dropout(0.25))
-#Conv3
-model.add(Conv2D(64, (3, 3), padding='same'))
-model.add(Activation('relu'))
-model.add(BatchNormalization())
-#Conv4
-model.add(Conv2D(64, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(BatchNormalization())
-model.add(Dropout(0.25))
+model.add(MobileNetV2(input_shape=(32,32,3),weights=None,classes=10))
 
-#Conv5
-model.add(Conv2D(128, (3, 3), padding='same'))
-model.add(Activation('relu'))
-model.add(BatchNormalization())
-#Conv6
-model.add(Conv2D(128, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(BatchNormalization())
-model.add(Dropout(0.25))
-
-model.add(Flatten())
-
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(BatchNormalization())
-model.add(Dropout(0.5))
-
-model.add(Dense(512))
-model.add(Activation('relu'))
-model.add(BatchNormalization())
-model.add(Dropout(0.5))
-
-model.add(Dense(10))
-model.add(Activation('softmax'))
+# model.add(Flatten())
+#
+# model.add(Dense(1024))
+# model.add(Activation('relu'))
+# model.add(BatchNormalization())
+# model.add(Dropout(0.5))
+#
+# model.add(Dense(512))
+# model.add(Activation('relu'))
+# model.add(BatchNormalization())
+# model.add(Dropout(0.5))
+#
+# model.add(Dense(10))
+# model.add(Activation('softmax'))
 
 
 opt = Adam(lr=lr_start, decay=1e-6)
