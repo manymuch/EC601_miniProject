@@ -9,7 +9,7 @@ from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormal
 from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
 from keras.preprocessing.image import ImageDataGenerator
-from keras.applications.vgg16 import VGG16
+from keras.applications.resnet50 import ResNet50
 
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
@@ -92,7 +92,7 @@ def read_jpg(file):
 
 model = Sequential()
 
-model.add(VGG16(input_shape=(32,32,3),weights=None,classes=10))
+model.add(ResNet50(input_shape=(32,32,3),weights=None,classes=10))
 
 
 opt = Adam(lr=lr_start, decay=1e-6)
