@@ -85,7 +85,7 @@ def read_jpg(file):
     except:
         print("./images/"+str(file)+" does not exit, please check")
         exit()
-    return np.expand_dims(imresize(raw,(32,32)),axis=0)
+    return np.expand_dims(imresize(raw,(32,32))/255.,axis=0)
 
 
 model = Sequential()
