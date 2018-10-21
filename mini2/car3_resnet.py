@@ -9,7 +9,7 @@ from keras.layers import Conv2D, Dense, Dropout,Flatten, Activation, BatchNormal
 from keras.optimizers import Adam
 from keras.utils import np_utils,to_categorical
 from keras.preprocessing.image import ImageDataGenerator
-from keras.applications.inception_v3 import InceptionV3
+from keras.applications.densenet import DenseNet121
 
 parser = argparse.ArgumentParser(description = 'neural network training parameters')
 parser.add_argument('--epochs',action="store",type=int, default=1)
@@ -91,7 +91,7 @@ def read_jpg(file):
 
 model = Sequential()
 
-model.add(InceptionV3(include_top=False,weights=None, input_shape=(32,32,3)))
+model.add(DenseNet121(include_top=False,weights=None, input_shape=(32,32,3)))
 
 model.add(Flatten())
 
