@@ -91,23 +91,10 @@ def read_jpg(file):
 
 model = Sequential()
 
-model.add(DenseNet121(include_top=False,weights=None, input_shape=(32,32,3)))
-
-model.add(Flatten())
-
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(BatchNormalization())
-model.add(Dropout(0.5))
-
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(BatchNormalization())
-model.add(Dropout(0.5))
-
-model.add(Dense(10))
-model.add(Activation('softmax'))
-
+model.add(DenseNet121(include_top=True,
+                      weights=None,
+                      input_shape=(32,32,3),
+                      calsses=10))
 
 opt = Adam(lr=lr_start, decay=1e-6)
 model.compile(loss='categorical_crossentropy',
