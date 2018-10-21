@@ -94,7 +94,7 @@ model = Sequential()
 model.add(DenseNet121(include_top=True,
                       weights=None,
                       input_shape=(32,32,3),
-                      calsses=10))
+                      classes=10))
 
 opt = Adam(lr=lr_start, decay=1e-6)
 model.compile(loss='categorical_crossentropy',
