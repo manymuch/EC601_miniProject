@@ -17,9 +17,9 @@ and then, train the networks, using CIFAR-10 datasets:
 ```
 python cars3.py --train --test --epochs=10
 ```
-it will train the networks for 10 epochs, save the parameters as a npz file and then test on testing dataset.
+the python code will look at the "./../data/cifar10" for training and test data,it will train the networks for 10 epochs, save the parameters as a npz file and then test on testing dataset.
 
-Also, you can continue training on a pretrained parameters using:
+Also, you can continue training on a pretrained parameters if you have trained before using:
 ```
 python cars.py --retrain --lr_start=1e-4
 ```
@@ -34,3 +34,6 @@ by default the --jpg is set to be tesla.jpg, you can test only by:
 ```
 python cars.py --test_images
 ```
+
+
+another model using DenseNet121 is also availble as "car3_densenet.py", the usage would be excatly the same as "car3.py". They will save parameters to different npz names,so they will not affect with each other.
