@@ -14,6 +14,8 @@ def generate_video(output_name,if_rmsrt=True):
     if if_rmsrt==True:
         rmsrt = "rm movies.srt"
         subprocess.call(rmsrt,shell=True)
+        rmimg = "rm -rf ./images"
+        subprocess.call(rmimg,shell=True)
 
 
 

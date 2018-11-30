@@ -9,6 +9,11 @@ def connect_mysql(LOCALHOST = 'localhost',USER = 'twitterweb',PASSWARD = 'bu_ec6
     CursorObject.execute(sqlQuery)
     return CursorObject
 
+def clear_table(CursorObject):
+    sqlQuery = "drop table twitter_images"
+    CursorObject.execute(sqlQuery)
+    print("table cleared!")
+
 def printall(CursorObject):
     sqlQuery = "show tables"
     CursorObject.execute(sqlQuery)
@@ -23,13 +28,27 @@ def printall(CursorObject):
     for row in rows:
         print(row)
 
-def insert(USER_NAME,TWITTER_NAME,URL,LABEL):
+def insert(CursorObject,USER_NAME,TWITTER_NAME,URL,LABEL):
     sqlQuery = "INSERT INTO twitter_images VALUES(NULL,\'%s\',\'%s\',\'%s\',\'%s\')" % (USER_NAME,TWITTER_NAME,URL,LABEL)
-    sqlQuery2 = "INSERT INTO twitter_images VALUES(NULL,'tony','@jeremy','http://helow.word','elephant')"
     CursorObject.execute(sqlQuery)
 
+def user(CursorObject,user_name):
+    sqlQuery = "SELECT * FROM twitter_images WHERE (username LIKE \'"+str(user_name)+"\')"
+    CursorObject.execute(sqlQuery)
+    rows = CursorObject.fetchall()
+    return (len(rows))
+
+
+def search(CursorObject,Keyword):
+    sqlQuery = "SELECT * FROM twitter_images WHERE (label LIKE \'%"+str(Keyword)+"%\')"
+    CursorObject.execute(sqlQuery)
+    rows = CursorObject.fetchall()
+    if not rows:
+        print("nothing matches "+str(Keyword))
+    for row in rows:
+        print(row)
 
 if __name__ == '__main__':
     CursorObject = connect_mysql()
-    insert("tony","@jeremy",'http://s/sdfsdfwew',"fat2")
+    insert(CursorObject,"tony","@jeremy",'http://s/sdfsdfwew',"fat2")
     printall(CursorObject)

@@ -57,7 +57,7 @@ def write_srt(directory):
     #change to directory that stores all the images
     os.chdir(directory)
     files = os.listdir()
-
+    label_list = []
     # writting subtitles files
     with open("./../movies.srt",'w') as f:
         i = 0
@@ -69,6 +69,9 @@ def write_srt(directory):
             f.write("%s\n"%get_time_format(i))
 
             #write labels
-            f.write("%s\n"%onelabel(file))
+            a_label = onelabel(file)
+            label_list.append(a_label)
+            f.write("%s\n"%a_label)
             print("getting "+str(i)+" labels")
     os.chdir("./../")
+    return label_list
