@@ -15,7 +15,8 @@ def insert(collection,USER_NAME,TWITTER_NAME,URL,LABEL):
     collection.insert_one(dictionary)
 
 def search(collection,keyword):
-    query = { "label": { "$regex": "/"+str(keyword)+"/" } }
+    #query =  { "label": {"$search": keyword }}
+    query = { "label": { "$regex": keyword } }
     for x in collection.find(query):
         print(x)
 
