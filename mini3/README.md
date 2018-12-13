@@ -16,4 +16,4 @@ There is a python terminal menu as an interface:
 
 ## Video
 
-![click here](https://youtu.be/MSCtmeoq-EA) to see demo video
+[click here](https://youtu.be/MSCtmeoq-EA) to see demo video
