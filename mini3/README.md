@@ -14,6 +14,6 @@ There is a python terminal menu as an interface:
 5. clear datasets table
 0. exit
 
-##Video
+## Video
 
 ![click here](https://youtu.be/MSCtmeoq-EA) to see demo video
