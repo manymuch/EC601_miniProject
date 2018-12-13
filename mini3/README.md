@@ -13,3 +13,7 @@ There is a python terminal menu as an interface:
 4. how many images a user has fetch?
 5. clear datasets table
 0. exit
+
+##Video
+
+![click here](https://youtu.be/MSCtmeoq-EA) to see demo video
